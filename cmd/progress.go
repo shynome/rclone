@@ -79,6 +79,14 @@ func printProgress(logMessage string) {
 	stats := strings.TrimSpace(accounting.GlobalStats().String())
 	logMessage = strings.TrimSpace(logMessage)
 
+	if fs.Config.AppendLog {
+		fmt.Printf("%s\n", stats)
+		if logMessage != "" {
+			fmt.Printf("%s\n", logMessage)
+		}
+		return
+	}
+
 	out := func(s string) {
 		buf.WriteString(s)
 	}
